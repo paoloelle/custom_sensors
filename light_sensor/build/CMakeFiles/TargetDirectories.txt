@@ -1,0 +1,3 @@
+/home/paolo/custom_sensors/light_sensor/build/CMakeFiles/light_sensor.dir
+/home/paolo/custom_sensors/light_sensor/build/CMakeFiles/edit_cache.dir
+/home/paolo/custom_sensors/light_sensor/build/CMakeFiles/rebuild_cache.dir
