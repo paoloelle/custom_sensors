@@ -85,6 +85,7 @@
             </box>
           </geometry>
         </visual>
+
         <!-- Here's our custom sensor -->
         <sensor name="light" type="custom" ignition:type="light_sensor">
           <always_on>1</always_on>
@@ -97,6 +98,7 @@
             </noise>
           </ignition:light_sensor>
         </sensor>
+        
       </link>
 
       <!-- Use the velocity control plugin to give it some initial velocity -->

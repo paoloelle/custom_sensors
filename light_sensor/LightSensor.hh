@@ -21,6 +21,8 @@
 #include <ignition/sensors/SensorTypes.hh>
 #include <ignition/transport/Node.hh>
 
+
+
 namespace custom
 {
   /// \brief Example sensor that publishes the total distance travelled by a
@@ -53,6 +55,7 @@ namespace custom
 
     /// \brief Latest total distance.
     private: double totalDistance{0.0};
+
 
     /// \brief Noise that will be applied to the sensor data
     private: ignition::sensors::NoisePtr noise{nullptr};

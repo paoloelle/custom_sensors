@@ -69,6 +69,16 @@ bool LightSensor::Load(const sdf::Sensor &_sdf)
     return false;
   }
 
+  // get sensor's position
+  auto sensorPose = _sdf.RawPose();
+
+  // get light position
+  auto parentElement = _sdf.Element()->GetParent()->GetParent()->GetParent(); // get world pointer
+  auto lightElement = parentElement->FindElement("light");
+  auto lightPose = lightElement->Get<ignition::math::Pose3d>("pose");
+
+  std::cout << lightPose << std::endl;
+
   return true;
 }
 
@@ -87,6 +97,8 @@ bool LightSensor::Update(const std::chrono::steady_clock::duration &_now)
 
   this->AddSequence(msg.mutable_header());
   this->pub.Publish(msg);
+
+  
 
   return true;
 }
