@@ -27,6 +27,12 @@
 
 using namespace custom;
 
+  ignition::math::v6::Pose3d sensorPose;
+
+  ignition::math::v6::Pose3d lightPose;
+
+  std::double_t lightValue;
+
 //////////////////////////////////////////////////
 bool LightSensor::Load(const sdf::Sensor &_sdf)
 {
@@ -70,16 +76,20 @@ bool LightSensor::Load(const sdf::Sensor &_sdf)
   }
 
   // get sensor's position
-  auto sensorPose = _sdf.RawPose();
+  sensorPose = _sdf.RawPose(); 
 
   // get light position
+  // TODO put a while cycle to go to the world entity (there is a method to check the name of the entity)
+  // so when the name of the entity is "world" stop while cycle
   auto parentElement = _sdf.Element()->GetParent()->GetParent()->GetParent(); // get world pointer
   auto lightElement = parentElement->FindElement("light");
-  auto lightPose = lightElement->Get<ignition::math::Pose3d>("pose");
+  lightPose = lightElement->Get<ignition::math::Pose3d>("pose");
+  
+  //std::cout << lightPose << std::endl; 
 
-  std::cout << lightPose << std::endl;
 
   return true;
+
 }
 
 //////////////////////////////////////////////////
@@ -91,9 +101,11 @@ bool LightSensor::Update(const std::chrono::steady_clock::duration &_now)
   frame->set_key("frame_id");
   frame->add_value(this->Name());
 
-  this->totalDistance = this->noise->Apply(this->totalDistance);
+  //this->totalDistance = this->noise->Apply(this->totalDistance);
 
-  msg.set_data(this->totalDistance);
+ // msg.set_data(this->totalDistance);
+
+  msg.set_data(lightValue);
 
   this->AddSequence(msg.mutable_header());
   this->pub.Publish(msg);
@@ -106,11 +118,14 @@ bool LightSensor::Update(const std::chrono::steady_clock::duration &_now)
 //////////////////////////////////////////////////
 void LightSensor::NewPosition(const ignition::math::Vector3d &_pos)
 {
-  if (!isnan(this->prevPos.X()))
-  {
-    this->totalDistance += this->prevPos.Distance(_pos);
-  }
-  this->prevPos = _pos;
+  //if (!isnan(this->prevPos.X()))
+  //{
+    lightValue = lightPose.Pos().Distance(_pos);
+    lightValue = (lightValue);
+    //this->totalDistance += this->prevPos.Distance(_pos);
+    //std::cout << lightValue << std::endl;
+  //}
+  //this->prevPos = _pos;
 }
 
 //////////////////////////////////////////////////

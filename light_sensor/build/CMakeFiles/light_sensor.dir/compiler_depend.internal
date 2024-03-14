@@ -849,4 +849,5 @@ CMakeFiles/light_sensor.dir/LightSensor.cc.o
  /usr/include/ignition/transport11/gz/transport/TopicUtils.hh
  /usr/include/ignition/transport11/gz/transport/detail/Node.hh
  /usr/include/ignition/transport11/ignition/transport/config.hh
+ /usr/include/ignition/math6/ignition/math/Vector3.hh
 

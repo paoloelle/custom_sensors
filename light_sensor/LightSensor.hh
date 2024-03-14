@@ -20,7 +20,7 @@
 #include <ignition/sensors/Sensor.hh>
 #include <ignition/sensors/SensorTypes.hh>
 #include <ignition/transport/Node.hh>
-
+#include <ignition/math6/ignition/math/Vector3.hh>
 
 
 namespace custom
@@ -55,7 +55,6 @@ namespace custom
 
     /// \brief Latest total distance.
     private: double totalDistance{0.0};
-
 
     /// \brief Noise that will be applied to the sensor data
     private: ignition::sensors::NoisePtr noise{nullptr};
